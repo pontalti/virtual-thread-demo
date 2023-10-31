@@ -1,0 +1,16 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  couchbase:
+    connection-string: 10.237.223.37:15780
+    username: Administrator
+    password: password
+  data:
+    couchbase:
+      auto-index: true
+      bucket-name: travel-sample
+      scope-name: inventory
+
+url:
+  win: c:/git/Viseca_thread_demo/
+  linux: /home/Viseca_thread_demo/

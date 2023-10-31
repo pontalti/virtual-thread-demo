@@ -1,0 +1,4 @@
+spring:
+  thread-executor: virtual
+  main:
+    allow-bean-definition-overriding: true
