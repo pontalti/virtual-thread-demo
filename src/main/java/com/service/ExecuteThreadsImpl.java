@@ -19,9 +19,9 @@ import org.springframework.stereotype.Service;
 import com.task.MyTask;
 
 @Service
-public class ExecuteTheads implements ExecuteThreads {
+public class ExecuteThreadsImpl implements ExecuteThreads {
 
-	private static Logger LOG = LoggerFactory.getLogger(ExecuteTheads.class);
+	private static Logger LOG = LoggerFactory.getLogger(ExecuteThreadsImpl.class);
 
 	private final int startThread;
 	private final int numOfThreads;
@@ -30,7 +30,7 @@ public class ExecuteTheads implements ExecuteThreads {
 	private ConfigurableApplicationContext context;
 	private final CompletionService<Double> completionService;
 
-	public ExecuteTheads(ConfigurableApplicationContext context, ExecutorService executor) {
+	public ExecuteThreadsImpl(ConfigurableApplicationContext context, ExecutorService executor) {
 		super();
 		this.startThread = 0;
 		this.received = 0;
