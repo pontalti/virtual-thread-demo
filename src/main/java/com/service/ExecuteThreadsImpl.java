@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
@@ -29,7 +30,8 @@ public class ExecuteThreadsImpl implements ExecuteThreads {
 	private ExecutorService executor;
 	private ConfigurableApplicationContext context;
 	private final CompletionService<Double> completionService;
-
+	private final AtomicInteger atomicInteger;
+	
 	public ExecuteThreadsImpl(ConfigurableApplicationContext context, ExecutorService executor) {
 		super();
 		this.startThread = 0;
@@ -38,6 +40,7 @@ public class ExecuteThreadsImpl implements ExecuteThreads {
 		this.context = context;
 		this.executor = executor;
 		this.completionService = new ExecutorCompletionService<Double>(this.executor);
+		this.atomicInteger = new AtomicInteger(0);
 	}
 
 	@Override
@@ -55,7 +58,7 @@ public class ExecuteThreadsImpl implements ExecuteThreads {
 	private List<MyTask> buildCollection() {
 		List<MyTask> list = new ArrayList<>();
 		IntStream.range(startThread, this.numOfThreads)
-					.forEach(i -> list.add(this.context.getBean(MyTask.class)));
+					.forEach(i -> list.add(this.context.getBean(MyTask.class, this.atomicInteger)));
 		return list;
 	}
 
@@ -73,6 +76,7 @@ public class ExecuteThreadsImpl implements ExecuteThreads {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
+		LOG.info("Nr of threads executeds  {}", this.atomicInteger);
 	}
 
 	private void shutdown() {

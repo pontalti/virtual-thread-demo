@@ -1,6 +1,7 @@
 package com.task;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +17,16 @@ public class MyTask implements Callable<Double> {
 	
 	private static Logger LOG = LoggerFactory.getLogger(MyTask.class);
 	
-	public MyTask() {
+	private final AtomicInteger atomicInteger;
+	
+	public MyTask(final AtomicInteger atomicInteger) {
 		super();
+		this.atomicInteger = atomicInteger;
 	}
 
 	@Override
 	public Double call() throws Exception {
+		this.atomicInteger.incrementAndGet();
 		Double d = Math.random();
 		LOG.info("Executing {}", Thread.currentThread());
 		return d;
