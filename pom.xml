@@ -16,10 +16,18 @@
 		<version>3.1.5</version>
 	</parent>
 
+	<scm>
+		<connection>scm:git:https://github.com/pontalti/virtual-thread-demo.git</connection>
+		<developerConnection>scm:git:https://github.com/pontalti/virtual-thread-demo.git</developerConnection>
+		<url>https://github.com/pontalti/virtual-thread-demo.git</url>
+	</scm>
+
 	<properties>
+		<warfinal.name>virtual-thread-demo</warfinal.name>
 		<java.version>21</java.version>
 		<guava.version>32.1.3-jre</guava.version>
 		<commons-collections4.version>4.4</commons-collections4.version>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
 	</properties>
 
 	<dependencies>
