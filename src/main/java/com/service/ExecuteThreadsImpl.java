@@ -27,8 +27,8 @@ public class ExecuteThreadsImpl implements ExecuteThreads {
 	private final int startThread;
 	private final int numOfThreads;
 	private int received;
-	private ExecutorService executor;
-	private ConfigurableApplicationContext context;
+	private final ExecutorService executor;
+	private final ConfigurableApplicationContext context;
 	private final CompletionService<Double> completionService;
 	private final AtomicInteger atomicInteger;
 	
@@ -36,10 +36,10 @@ public class ExecuteThreadsImpl implements ExecuteThreads {
 		super();
 		this.startThread = 0;
 		this.received = 0;
-		this.numOfThreads = 100000;
+		this.numOfThreads = 10000;
 		this.context = context;
 		this.executor = executor;
-		this.completionService = new ExecutorCompletionService<Double>(this.executor);
+		this.completionService = new ExecutorCompletionService<>(this.executor);
 		this.atomicInteger = new AtomicInteger(0);
 	}
 
@@ -74,7 +74,7 @@ public class ExecuteThreadsImpl implements ExecuteThreads {
 			}
 			
 		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
+			LOG.error("Error -> {}", e);
 		}
 		LOG.info("Nr of threads executeds  {}", this.atomicInteger);
 	}

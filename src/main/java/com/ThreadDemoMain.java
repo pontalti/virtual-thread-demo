@@ -14,8 +14,8 @@ public class ThreadDemoMain implements CommandLineRunner {
 
 	private static Logger LOG = LoggerFactory.getLogger(ThreadDemoMain.class);
 
-	private ConfigurableApplicationContext context;
-	private ExecuteThreads executeThread;
+	private final ConfigurableApplicationContext context;
+	private final ExecuteThreads executeThread;
 
 	public ThreadDemoMain(ConfigurableApplicationContext context, ExecuteThreads executeThread) {
 		super();
@@ -31,8 +31,9 @@ public class ThreadDemoMain implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		this.executeThread.prepareData();
-		this.context.close();
+		try (this.context) {
+			this.executeThread.prepareData();
+		}
 	}
 
 }
